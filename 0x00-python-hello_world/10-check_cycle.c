@@ -6,13 +6,17 @@
  */
 int check_cycle(listint_t *list)
 {
-	listint_t *ccheck = list->next;
+	listint_t *ccheck = list;
+	listint_t *ccfast = list;
 
-	while (ccheck != NULL)
+
+	while (ccheck && ccfast && ccfast->next)
 	{
-		if (ccheck == list)
-			return (1);
 		ccheck = ccheck->next;
+		ccfast = ccfast->next->next;
+
+		if (ccheck == ccfast)
+			return (1);
 	}
 	if (list == NULL)
 		return (0);
