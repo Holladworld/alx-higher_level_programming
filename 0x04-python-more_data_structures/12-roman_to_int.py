@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 def roman_to_int(roman_string):
-    roman_dict =  {'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1}
+    roman_dict = { 'I': 1, 'V': 5, 'X': 10, 'L':  50, 'C': 100, 'D': 500, 'M': 1000}
     sumTotal = 0
-    for roman_num in reversed(roman_string):
-        roman = roman_dict[roman_num]
-        sumTotal += roman if sumTotal < roman * 5 else -roman
-
-    if not roman_string or type(roman_string) != str:
-            return 0
-    return sumTotal
+    for i in range(len(roman_string)):
+        if roman_dict.get(roman_string[i], 0) == 0:
+                return 0
+        if (i != (len(roman_string) -1) and
+                roman_dict[roman_string[i]] < roman_dict[roman_string[i + 1]]):
+                sumTotal += roman_dict[roman_string[i]] * -1
+        else:
+            sumTotal += roman_dict[roman_string[i]]
+        return sumTotal
