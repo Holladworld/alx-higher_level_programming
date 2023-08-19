@@ -10,4 +10,4 @@ def roman_to_int(roman_string):
                 sumTotal += roman_dict[roman_string[i]] * -1
         else:
             sumTotal += roman_dict[roman_string[i]]
-        return sumTotal
+    return sumTotal
