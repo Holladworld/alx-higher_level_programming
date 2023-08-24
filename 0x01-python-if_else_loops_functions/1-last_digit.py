@@ -12,4 +12,5 @@ if last_digit_of > 5:
 elif last_digit_of == 0:
     print("{}{} is {} and is 0".format(i, number, last_digit_of))
 else:
-    print("{}{} is {} and is less than 6 and not 0".format(i, number, last_digit_of))
+    print("{}{} is {} and is less than 6 and not 0"
+          .format(i, number, last_digit_of))
