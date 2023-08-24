@@ -1,6 +1,10 @@
 #!/usr/bin/python3
-for numbers in range(9):
-    for digit in range(number + 1, 10):
-        if numbers * 10 + digits < 89:
-            print("{:d}{:d}".format(numbers, digits), end=", ")
-print("{:d}".format(89))
+for numbers in range(0, 100):
+    digits = numbers % 10
+    num = numbers // 10
+    if digits > num != num:
+        print(":02d}".format(numbers), end="")
+        if numbers != 89:
+            print(", ", end="")
+        else:
+            print("\n", end="")
