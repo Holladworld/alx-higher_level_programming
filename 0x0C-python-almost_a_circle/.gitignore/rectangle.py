@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-"""Module for Rectangle class"""
+""" Rectangle Module """
 from models.base import Base
 
-
 class Rectangle(Base):
-    """class Rectangle that inherits from Base"""
+    """ Rectangle class """
 
     def __init__(self, width, height, x=0, y=0, id=None):
-        """Constructor"""
+        """ Constructor method """
         super().__init__(id)
         self.width = width
         self.height = height
@@ -16,40 +15,40 @@ class Rectangle(Base):
 
     @property
     def width(self):
-        """width of a rectangle"""
+        """ Getter for width """
         return self.__width
 
     @width.setter
     def width(self, value):
-        """setter width"""
-        if type(value) is not int:
-            raise TypeError('width must be an integer')
+        """ Setter for width """
+        if not isinstance(value, int):
+            raise TypeError("width must be an integer")
         if value <= 0:
-            raise ValueError('width must be > 0')
+            raise ValueError("width must be > 0")
         self.__width = value
 
     @property
     def height(self):
-        """height of a rectangle"""
+        """ Getter for height """
         return self.__height
 
     @height.setter
     def height(self, value):
-        """setter height"""
-        if type(value) is not int:
-            raise TypeError('height must be an integer')
+        """ Setter for height """
+        if not isinstance(value, int):
+            raise TypeError("height must be an integer")
         if value <= 0:
-            raise ValueError('height must be > 0')
+            raise ValueError("height must be > 0")
         self.__height = value
 
     @property
     def x(self):
-        """coordinate x"""
+        """Getter for x"""
         return self.__x
 
     @x.setter
     def x(self, value):
-        """setter x"""
+        """setter for x"""
         if type(value) is not int:
             raise TypeError('x must be an integer')
         if value < 0:
@@ -58,12 +57,12 @@ class Rectangle(Base):
 
     @property
     def y(self):
-        """coordinate x"""
+        """getter for x"""
         return self.__y
 
     @y.setter
     def y(self, value):
-        """setter y"""
+        """setter for y"""
         if type(value) is not int:
             raise TypeError('y must be an integer')
         if value < 0:
@@ -71,26 +70,24 @@ class Rectangle(Base):
         self.__y = value
 
     def area(self):
-        """Public method: returns the area value of the Rectangle"""
+        """ Calculate the area of the rectangle """
         return self.width * self.height
 
     def display(self):
-        """
-        Public method: prints in stdout the Rectangle instance
-        with the character #
-        """
-        print('\n' * self.y + '\n'.join([' ' * self.x +
+
+        """ Display the rectangle using '#' character and offsets """        print('\n' * self.y + '\n'.join([' ' * self.x +
                                          '#' * self.width
                                          for i in range(self.height)]))
 
     def __str__(self):
-        """Prints string representation of a Rectangle"""
+        """ String representation of the rectangle """
         return '[{}] ({}) {}/{} - {}/{}'.\
             format(type(self).__name__, self.id, self.x, self.y,
                    self.width, self.height)
 
+
     def update(self, *args, **kwargs):
-        """Public method: assigns an argument to each attribute"""
+        """ Update attributes with no-keyword arguments in the specified order """
         attributes = ["id", "width", "height", "x", "y"]
         for atrr, arg in zip(attributes, args):
             setattr(self, atrr, arg)

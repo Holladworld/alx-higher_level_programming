@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """Module for Base class"""
 from json import dumps, loads
 import csv
@@ -10,7 +11,7 @@ class Base:
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """Constructor"""
+        """Constructor method"""
         if id is not None:
             self.id = id
         else:
@@ -19,7 +20,7 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """returns the JSON string representation of list_dictionaries"""
+        "''Returns the JSON string representation of list_dictionaries"""
         if not list_dictionaries or not len(list_dictionaries):
             list_dictionaries = []
         return dumps(list_dictionaries)
