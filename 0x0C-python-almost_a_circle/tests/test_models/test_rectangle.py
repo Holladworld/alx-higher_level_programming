@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Module for Rectangle unit tests"""
+'''Module for Rectangle unit tests'''
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
@@ -11,14 +11,14 @@ from contextlib import redirect_stdout
 
 
 class TestRectangle(unittest.TestCase):
-    """Test the Rectangle Class"""
+    '''Test the Rectangle Class'''
 
     def setUp(self):
-        """Initialize nb_objects before each test"""
+        '''Initialize nb_objects before each test'''
         Base._Base__nb_objects = 0
 
     def tearDown(self):
-        """Cleans up tasks"""
+        '''Cleans up tasks'''
         pass
 
     def test_docstrings(self):
@@ -45,41 +45,40 @@ class TestRectangle(unittest.TestCase):
         self.assertIs(hasattr(Rectangle, "to_dictionary"), True)
         self.assertIsNotNone(Rectangle.to_dictionary.__doc__)
 
-# ---------------Tests: task 2 and 3--------------------------------
     def test_class(self):
-        """Test Rectangle class"""
+        '''Test Rectangle class'''
         self.assertEqual(str(Rectangle), "<class 'models.rectangle.\
 Rectangle'>")
 
     def test_inheritance(self):
-        """Test if Rectangle inherits from Base"""
+        '''Test if Rectangle inherits from Base'''
         self.assertTrue(issubclass(Rectangle, Base))
 
     def test_init_no_args(self):
-        """Test Rectangle() instantiation without self"""
-        with self.assertRaises(TypeError) as excep:
+        '''Test Rectangle() instantiation without self'''
+        with self.assertRaises(TypeError) as custom_exception:
             Rect_test = Rectangle()
-        message = "__init__() missing 2 required positional \
+        custom_message = "__init__() missing 2 required positional \
 arguments: 'width' and 'height'"
-        self.assertEqual(str(excep.exception), message)
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
     def test_init_one_arg(self):
-        """Test Rectangle() instantiation with a missing argument"""
-        with self.assertRaises(TypeError) as excep:
+        '''Test Rectangle() instantiation with a missing argument'''
+        with self.assertRaises(TypeError) as custom_exception:
             Rect_test = Rectangle(67)
-        message = "__init__() missing 1 required positional argument: 'height'"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "__init__() missing 1 required positional argument: 'height'"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
     def test_init_excedent_args(self):
-        """Test Rectangle() instantiation with leftover arguments"""
-        with self.assertRaises(TypeError) as excep:
+        '''Test Rectangle() instantiation with leftover arguments'''
+        with self.assertRaises(TypeError) as custom_exception:
             Rect_test = Rectangle(45, 56, 89, 102, 56, 23)
-        message = "__init__() takes from 3 to 6 positional \
+        custom_message = "__init__() takes from 3 to 6 positional \
 arguments but 7 were given"
-        self.assertEqual(str(excep.exception), message)
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
     def test_instantiation(self):
-        """Test Rectangle() instantiation with 2 arguments"""
+        '''Test Rectangle() instantiation with 2 arguments'''
         Rect_test = Rectangle(6, 8)
         self.assertEqual(str(type(Rect_test)), "<class 'models.\
 rectangle.Rectangle'>")
@@ -92,7 +91,7 @@ rectangle.Rectangle'>")
         self.assertEqual(Rect_test.__dict__, dic)
 
     def test_instantiation_positional(self):
-        """Test Rectangle() positional instantiation"""
+        '''Test Rectangle() positional instantiation'''
         Rect_test = Rectangle(9, 4, 12, 7, 8)
         self.assertEqual(str(type(Rect_test)), "<class 'models.\
 rectangle.Rectangle'>")
@@ -116,7 +115,7 @@ rectangle.Rectangle'>")
         self.assertEqual(Rect_test.__dict__, dic)
 
     def test_instantiation_no_positional(self):
-        """Test Rectangle() no positional instantiation"""
+        '''Test Rectangle() no positional instantiation'''
         Rect_tst = Rectangle(id=9, x=4, width=12, y=7, height=8)
         self.assertEqual(str(type(Rect_tst)), "<class 'models.\
 rectangle.Rectangle'>")
@@ -129,7 +128,7 @@ rectangle.Rectangle'>")
         self.assertEqual(Rect_tst.__dict__, dic)
 
     def test_mix_positional(self):
-        """Test Rectangle() positional/ no positional instantiation"""
+        '''Test Rectangle() positional/ no positional instantiation'''
         Rect_test = Rectangle(9, 100, 3, id=12, y=7)
         self.assertEqual(str(type(Rect_test)), "<class 'models.\
 rectangle.Rectangle'>")
@@ -142,13 +141,13 @@ rectangle.Rectangle'>")
         self.assertEqual(Rect_test.__dict__, dic)
 
     def test_inheritance_id(self):
-        """Test if id is inherits from base"""
+        '''Test if id inherits from base'''
         Base._Base__nb_objects = 78
         Rect_test = Rectangle(2, 4)
         self.assertEqual(Rect_test.id, 79)
 
     def test_getter_setter(self):
-        """Test getters and setters"""
+        '''Test getters and setters'''
         Rect_test = Rectangle(5, 8)
         Rect_test.width = 54
         Rect_test.height = 43
@@ -166,114 +165,110 @@ rectangle.Rectangle'>")
         self.assertEqual(Rect_test.y, 2)
 
     def test_arguments_invalid_type(self):
-        """Test invalid arguments types"""
-        with self.assertRaises(TypeError) as excep:
+        '''Test invalid arguments types'''
+        with self.assertRaises(TypeError) as custom_exception:
             Rect_test = Rectangle("34", 2)
-        message = "width must be an integer"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "width must be an integer"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(TypeError) as excep:
+        with self.assertRaises(TypeError) as custom_exception:
             Rect_test = Rectangle(89, "w")
-        message = "height must be an integer"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "height must be an integer"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(TypeError) as excep:
-            Rect_test = Rectangle(89, 6, "holby")
-        message = "x must be an integer"
-        self.assertEqual(str(excep.exception), message)
+        with self.assertRaises(TypeError) as custom_exception:
+            Rect_test = Rectangle(89, 6, "hello")
+        custom_message = "x must be an integer"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(TypeError) as excep:
-            Rect_test = Rectangle(89, 6, 7, "betty")
-        message = "y must be an integer"
-        self.assertEqual(str(excep.exception), message)
+        with self.assertRaises(TypeError) as custom_exception:
+            Rect_test = Rectangle(89, 6, 7, "world")
+        custom_message = "y must be an integer"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test = Rectangle(0, 6)
-        message = "width must be > 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "width must be > 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test = Rectangle(-7, 6)
-        message = "width must be > 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "width must be > 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test = Rectangle(9, 0)
-        message = "height must be > 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "height must be > 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test = Rectangle(9, -12)
-        message = "height must be > 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "height must be > 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test = Rectangle(89, 6, -5)
-        message = "x must be >= 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "x must be >= 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test = Rectangle(89, 6, 6, -8)
-        message = "y must be >= 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "y must be >= 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        def invalid_types(self):
-            """Returns lists with different invalid cases"""
-            types = (3.56, float('inf'), float('Nan'), True,
-                     (5, ), -6.792, [8], None, {8, 7})
-            return types
+    def invalid_types(self):
+        '''Returns lists with different invalid cases'''
+        types = (3.56, float('inf'), float('Nan'), True,
+                 (5, ), -6.792, [8], None, {8, 7})
+        return types
 
-        def validate_types(self):
-            """Test invalid arguments types with different cases"""
-            Rect_test = Rectangle(8, 5)
-            attributes = ["x", "y", "width", "height"]
-            for attr in attributes:
-                message = "{} must be an integer".format(attr)
-                for invalid in self.invalid_types():
-                    with self.assertRaises(TypeError) as excep:
-                        setattr(Rect_test, attr, invalid_types)
-                    self.assertEqual(str(excep.exception), message)
-
-# ---------------Tests: task 4--------------------------------
+    def validate_types(self):
+        '''Test invalid arguments types with different cases'''
+        Rect_test = Rectangle(8, 5)
+        attributes = ["x", "y", "width", "height"]
+        for attr in attributes:
+            custom_message = "{} must be an integer".format(attr)
+            for invalid in self.invalid_types():
+                with self.assertRaises(TypeError) as custom_exception:
+                    setattr(Rect_test, attr, invalid_types)
+                self.assertEqual(str(custom_exception.exception), custom_message)
 
     def test_area_only_dimensions(self):
-        """Test area() with height and witdth only"""
+        '''Test area() with height and width only'''
         Rect_test = Rectangle(3, 8)
         Rect_test.area()
         self.assertEqual(Rect_test.area(), 24)
 
     def test_area_no_self(self):
-        """Test area() without self"""
+        '''Test area() without self'''
         Rect_test = Rectangle(3, 8)
-        with self.assertRaises(TypeError) as excep:
+        with self.assertRaises(TypeError) as custom_exception:
             Rectangle.area()
-        message = "area() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "area() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
     def test_area_positional(self):
-        """Test area() with positional arguments"""
+        '''Test area() with positional arguments'''
         Rect_test = Rectangle(5, 9, 6, 11, 12)
         Rect_test.area()
         self.assertEqual(Rect_test.area(), 45)
 
     def test_area_no_positional(self):
-        """Test area() with no positional arguments"""
+        '''Test area() with no positional arguments'''
         Rect_test = Rectangle(id=5, height=9, y=6, x=11, width=2)
         Rect_test.area()
         self.assertEqual(Rect_test.area(), 18)
 
-# ---------------Tests: task 5 & 7--------------------------------
-
     def test_display_no_args(self):
-        """Test display() without self"""
+        '''Test display() without self'''
         Rect_test = Rectangle(5, 9)
-        with self.assertRaises(TypeError) as excep:
+        with self.assertRaises(TypeError) as custom_exception:
             Rectangle.display()
-        message = "display() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "display() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
     def test_display_no_x_y(self):
-        """Test display() without x and y"""
+        '''Test display() without x and y'''
         Rect_test = Rectangle(1, 1)
         out_put = io.StringIO()
         with redirect_stdout(out_put):
@@ -292,7 +287,7 @@ rectangle.Rectangle'>")
         self.assertEqual(out_put.getvalue(), out_hope)
 
     def test_display_with_x_y(self):
-        """Test display() with x and y"""
+        '''Test display() with x and y'''
         Rect_test = Rectangle(7, 3, 2, 3, 4)
         out_put = io.StringIO()
         with redirect_stdout(out_put):
@@ -323,7 +318,9 @@ rectangle.Rectangle'>")
 "
         self.assertEqual(out_put.getvalue(), out_hope)
 
-        Rect_test = Rectangle(6, 5, 2, 3)
+    def test_display_no_x(self):
+        '''Test display() without x'''
+        Rect_test = Rectangle(width=5, height=4, y=3)
         out_put = io.StringIO()
         with redirect_stdout(out_put):
             Rect_test.display()
@@ -331,36 +328,18 @@ rectangle.Rectangle'>")
 \n\
 \n\
 \n\
-  ######\n\
-  ######\n\
-  ######\n\
-  ######\n\
-  ######\n\
+#####\n\
+#####\n\
+#####\n\
+#####\n\
 "
         self.assertEqual(out_put.getvalue(), out_hope)
 
-        def test_display_no_x(self):
-            """Test display() without x"""
-            Rect_test = Rectangle(width=5, height=4, y=3)
-            out_put = io.StringIO()
-            with redirect_stdout(out_put):
-                Rect_test.display()
-            out_hope = "\
-\n\
-\n\
-\n\
-#####\n\
-#####\n\
-#####\n\
-#####\n\
-"
-            self.assertEqual(out_put.getvalue(), out_hope)
-
-            Rect_test = Rectangle(5, 7, 0, 2)
-            out_put = io.StringIO()
-            with redirect_stdout(out_put):
-                Rect_test.display()
-            out_hope = "\
+        Rect_test = Rectangle(5, 7, 0, 2)
+        out_put = io.StringIO()
+        with redirect_stdout(out_put):
+            Rect_test.display()
+        out_hope = "\
 \n\
 \n\
 #####\n\
@@ -371,27 +350,27 @@ rectangle.Rectangle'>")
 #####\n\
 #####\n\
 "
-            self.assertEqual(out_put.getvalue(), out_hope)
+        self.assertEqual(out_put.getvalue(), out_hope)
 
-        def test_display_no_y(self):
-            """Test display() without y"""
-            Rect_test = Rectangle(width=5, height=4, x=4)
-            out_put = io.StringIO()
-            with redirect_stdout(out_put):
-                Rect_test.display()
-            out_hope = "\
+    def test_display_no_y(self):
+        '''Test display() without y'''
+        Rect_test = Rectangle(width=5, height=4, x=4)
+        out_put = io.StringIO()
+        with redirect_stdout(out_put):
+            Rect_test.display()
+        out_hope = "\
     #####\n\
     #####\n\
     #####\n\
     #####\n\
 "
-            self.assertEqual(out_put.getvalue(), out_hope)
+        self.assertEqual(out_put.getvalue(), out_hope)
 
-            Rect_test = Rectangle(3, 7, 6)
-            out_put = io.StringIO()
-            with redirect_stdout(out_put):
-                Rect_test.display()
-            out_hope = "\
+        Rect_test = Rectangle(3, 7, 6)
+        out_put = io.StringIO()
+        with redirect_stdout(out_put):
+            Rect_test.display()
+        out_hope = "\
       ###\n\
       ###\n\
       ###\n\
@@ -400,19 +379,18 @@ rectangle.Rectangle'>")
       ###\n\
       ###\n\
 "
-            self.assertEqual(out_put.getvalue(), out_hope)
+        self.assertEqual(out_put.getvalue(), out_hope)
 
-# ---------------Tests: task 6--------------------------------
     def test_str_no_self(self):
-        """Test str without self"""
+        '''Test str without self'''
         Rect_test = Rectangle(5, 4, 4)
-        with self.assertRaises(TypeError) as excep:
+        with self.assertRaises(TypeError) as custom_exception:
             Rectangle.__str__()
-        message = "__str__() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "__str__() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
     def test_str_n_arg(self):
-        """Test str() with different amount of arguments"""
+        '''Test str() with different amounts of arguments'''
         Rect_test = Rectangle(8, 12)
         message = '[Rectangle] (1) 0/0 - 8/12'
         self.assertEqual(str(Rect_test), message)
@@ -426,22 +404,20 @@ rectangle.Rectangle'>")
         message = '[Rectangle] (56) 3/4 - 8/12'
         self.assertEqual(str(Rect_test), message)
 
-# ---------------Tests: task 8 & 9--------------------------------
-
     def test_update_no_self(self):
-        """Test update without self"""
+        '''Test update without self'''
         Rect_test = Rectangle(5, 9)
-        with self.assertRaises(TypeError) as excep:
+        with self.assertRaises(TypeError) as custom_exception:
             Rectangle.update()
-        message = "update() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "update() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
         dic = Rect_test.__dict__.copy()
         Rect_test.update()
         self.assertEqual(Rect_test.__dict__, dic)
 
     def test_update_change_args(self):
-        """Test update with different amount of arguments"""
+        '''Test update with different amounts of arguments'''
         Rect_test = Rectangle(7, 4)
         dic = Rect_test.__dict__.copy()
 
@@ -482,32 +458,32 @@ rectangle.Rectangle'>")
         self.assertEqual(str(Rect_test), "[Rectangle] (8) 3/2 - 1/51")
 
     def test_update_args_wrong(self):
-        """Test update with different invalid arguments(args)"""
+        '''Test update with different invalid arguments(args)'''
         Rect_test = Rectangle(11, 3)
         dic = Rect_test.__dict__.copy()
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test.update(9, 0)
-        message = "width must be > 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "width must be > 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test.update(9, 1, -98)
-        message = "height must be > 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "height must be > 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test.update(9, 1, 98, -4)
-        message = "x must be >= 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "x must be >= 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test.update(9, 1, 98, 4, -8)
-        message = "y must be >= 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "y must be >= 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
     def test_update_args_kwargs(self):
-        """Test update with different valid arguments(kwargs)"""
+        '''Test update with different valid arguments(kwargs)'''
         Rect_test = Rectangle(7, 4)
         dic = Rect_test.__dict__.copy()
 
@@ -548,59 +524,57 @@ rectangle.Rectangle'>")
         self.assertEqual(str(Rect_test), "[Rectangle] (2) 3/1 - 51/8")
 
         def test_update_kwargs_wrong(self):
-            """Test update with different invalid arguments(kwargs)"""
+            '''Test update with different invalid arguments(kwargs)'''
             Rect_test = Rectangle(11, 3)
         dic = Rect_test.__dict__.copy()
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test.update(id=9, height=0)
-        message = "height must be > 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "height must be > 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test.update(width=-9, id=1, height=98)
-        message = "width must be > 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "width must be > 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test.update(width=9, height=1, id=98, x=-4)
-        message = "x must be >= 0"
-        self.assertEqual(str(excep.exception), message)
+        custom_message = "x must be >= 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
-        with self.assertRaises(ValueError) as excep:
+        with self.assertRaises(ValueError) as custom_exception:
             Rect_test.update(id=9, x=1, width=98, height=4, y=-8)
-        message = "y must be >= 0"
-        self.assertEqual(str(excep.exception), message)
-
-        with self.assertRaises(ValueError) as excep:
-            Rect_test.update(id=9, x=1, width=98, height=4, y=-8)
-        message = "y must be >= 0"
-        self.assertEqual(str(excep.exception), message)
-
-# -----------------Tests: task 13---------------------------------
+        custom_message = "y must be >= 0"
+        self.assertEqual(str(custom_exception.exception), custom_message)
 
     def test_dictionary(self):
-        """Test dictionary"""
-        with self.assertRaises(TypeError) as excep:
-            Rectangle.to_dictionary()
-        message = "to_dictionary() missing 1 required \
-positional argument: 'self'"
-        self.assertEqual(str(excep.exception), message)
+        """Test the to_dictionary() method of the Rectangle class"""
 
+        # Test calling to_dictionary() without an instance (missing 'self')
+        with self.assertRaises(TypeError) as custom_exception:
+            Rectangle.to_dictionary()
+        custom_message = "to_dictionary() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(custom_exception.exception), custom_message)
+
+    # Create a Rectangle instance and test to_dictionary() with default values
         Rect_test = Rectangle(5, 78)
         dic = {'id': 1, 'y': 0, 'height': 78, 'width': 5, 'x': 0}
         self.assertEqual(Rect_test.to_dictionary(), dic)
 
+    # Create another Rectangle instance with specific values and test to_dictionary()
         Rect_test = Rectangle(5, 78, 5, 2, 9)
         dic = {'id': 9, 'y': 2, 'height': 78, 'width': 5, 'x': 5}
         self.assertEqual(Rect_test.to_dictionary(), dic)
 
+    # Create two Rectangle instances and test updating one with the dictionary of the other
         Rect_test1 = Rectangle(1, 4, 5, 6, 2)
         Rect_test1_dic = Rect_test1.to_dictionary()
         Rect_test2 = Rectangle(4, 8, 7, 90, 3)
         Rect_test2.update(**Rect_test1_dic)
         self.assertEqual(str(Rect_test1), str(Rect_test2))
 
+    # Test updating a Rectangle instance with specific values and compare the dictionary
         Rect_test.update(12, 5, 67, 4, 8)
         dic = {'height': 67, 'x': 4, 'id': 12, 'width': 5, 'y': 8}
         self.assertEqual(Rect_test.to_dictionary(), dic)
