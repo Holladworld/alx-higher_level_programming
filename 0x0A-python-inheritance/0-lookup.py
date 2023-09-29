@@ -4,7 +4,6 @@ Module for lookup function
 '''
 
 def lookup(obj):
-
     '''
     Args:
         obj: Initial object
