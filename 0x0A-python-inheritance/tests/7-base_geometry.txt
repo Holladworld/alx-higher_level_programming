@@ -1,0 +1,52 @@
+The ``7-base_geometry`` module
+======================
+
+Using ``print_sorted``
+--------------------
+
+Import function from the module:
+	>>> BaseGeometry = __import__("7-base_geometry").BaseGeometry
+		>>> bg = BaseGeometry()
+
+Checking for correct class Type test
+	>>> bg = BaseGeometry()
+	>>> type(bg) == BaseGeometry
+	True
+
+Create bg with parameters
+	>>> bg = BaseGeometry(7, 9)
+	Traceback (most recent call last):
+			...
+	TypeError: __init__() takes 1 positional argument but 3 were given
+
+Checking for integer validator instance
+	>>> type(BaseGeometry.__dict__["integer_validator"])
+	<class 'function'>
+
+Checking regular case
+	>>> bg.integer_validator("my_int", 12)
+	>>> bg.integer_validator("width", 89)
+
+
+Checking for method argument test (3args)
+	>>> bg.integer_validator(1, 1, 1)
+	Traceback (most recent call last):
+	TypeError: integer_validator() takes 3 positional arguments but 4 were given
+
+Checking with value 0
+	>>> bg.integer_validator("zero", 0)
+	Traceback (most recent call last):
+			...
+	ValueError: zero must be greater than 0
+
+Checking with negative value
+	>>> bg.integer_validator("negative", -3)
+	Traceback (most recent call last):
+			...
+	ValueError: negative must be greater than 0
+
+Checking area():
+	>>> bg.area()
+	Traceback (most recent call last):
+			...
+	Exception: area() is not implemented
