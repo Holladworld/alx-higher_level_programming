@@ -2,14 +2,13 @@
 '''Defines a Rectangle class.'''
 
 
-
 class Rectangle:
     '''Represent a rectangle.'''
 
     def __init__(self, width=0, height=0):
-       '''Initialize the Rectangle'''
-       self.height = height
-       self.width = width
+    '''Initialize the Rectangle'''
+    self.height = height
+    self.width = width
 
     @property
     def width(self):
