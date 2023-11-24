@@ -18,8 +18,10 @@ if __name__ == '__main__':
     session = Session()
 
     # Query all states and sort by id
-    states = session.query(State).order_by(State.id).all()
+    states = session.query(State).order_by(State.id).first()
 
     # Print results
-    for state in states:
-        print('{}: {}'.format(state.id, state.name))
+    if states is None:
+        print("Nothing")
+    else:
+        print('{}: {}'.format(states.id, states.name))

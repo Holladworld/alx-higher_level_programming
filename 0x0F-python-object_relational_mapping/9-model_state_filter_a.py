@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Script that lists all State objects from the database hbtn_0e_6_usa
+Script that lists all State objects that contain the letter a
+from the database hbtn_0e_6_usa
 """
 
 import sys
@@ -17,8 +18,9 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Query all states and sort by id
-    states = session.query(State).order_by(State.id).all()
+    # Query all states that contains letter a and sort by id
+    states = session.query(State).filter(State.name.like(
+                           '%a%')).order_by(State.id).all()
 
     # Print results
     for state in states:
